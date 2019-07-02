@@ -5,7 +5,8 @@ class ListingsController < ApplicationController
     end
     
     def new
-        
+        @book = Book.new
+        @listing = Listing.new
     end
 
     def create
