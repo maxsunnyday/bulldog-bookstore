@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   
     def create
       # byebug
-      user = User.find_by(email: params[:email])
+      user = User.find_by(username: params[:username])
       # First check if the user exists
       # Then check if this user is authentic
       if user && user.authenticate(params[:password]) # Shortcircuiting

@@ -1,0 +1,8 @@
+<h1>All listings</h1>
+<br>
+<h3>Items available for sale</h3>
+<ul>
+    <% @listings.each do |listing| %>
+        <li><%= link_to listing.book.title, listing_path(listing) %></li>
+    <% end %>
+</ul>

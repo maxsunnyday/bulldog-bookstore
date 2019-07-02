@@ -1,0 +1,11 @@
+<!-- This is the login page -->
+
+<h1> Create a new session! (Login) </h1>
+
+<%= form_tag "/sessions" do %>
+    <%= label_tag :username %>
+    <%= text_field_tag :username %>
+    <%= label_tag :password %>
+    <%= password_field_tag :password %>
+    <%= submit_tag "Log in" %>
+<% end %>
