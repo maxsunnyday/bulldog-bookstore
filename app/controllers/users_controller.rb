@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
         if @user.valid?
             session[:user_id] = @user.id # Logs me in after signing up
+            Order.create(user_id: session[:user_id], status: "active")
             redirect_to user_path(@user)
         else
             flash[:error] = @user.errors.full_messages
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
 
     def show
         # byebug
-        @user = User.find(params[:id])
+        @user = User.find(session[:user_id])
     end
 
     def edit

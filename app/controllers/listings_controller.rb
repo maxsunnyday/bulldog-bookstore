@@ -22,6 +22,7 @@ class ListingsController < ApplicationController
 
     def show
         @listing = Listing.find(params[:id])
+        @order = Order.find_by(user_id: session[:user_id], status: "active")
     end
 
     def edit
