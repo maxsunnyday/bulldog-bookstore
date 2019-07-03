@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
   
     def destroy
       order = Order.find_by(user_id: session[:user_id], status: "active")
-      order.update(user_id: session[:user_id], status: "done")
+      order.update(user_id: session[:user_id], status: "unfinished")
       session.delete :user_id
       redirect_to "/login"
     end

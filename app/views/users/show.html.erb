@@ -17,3 +17,13 @@
         <% end %>
     </ul>
 <% end %>
+
+<%= form_tag "/orders", method: :get do %>
+    <%= hidden_field :checkout, true %>
+    <%= submit_tag "Checkout" %>
+<% end %>
+
+<%= form_tag "/orders", method: :get do %>
+    <%= hidden_field :past, true %>
+    <%= submit_tag "Past Orders" %>
+<% end %>

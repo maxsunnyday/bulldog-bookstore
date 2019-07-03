@@ -2,7 +2,36 @@ class ListingsController < ApplicationController
     before_action :authorized
 
     def index
-        @listings = Listing.all
+        # Put all this logic into the model
+
+        if params[:search]
+            books = Book.where(title: params[:search])
+            if books
+                @listings = []
+
+                books.each do |book|
+                    @listings << Listing.where(book_id: book.id)
+                end
+
+                @listings = @listings.flatten.select do |listing|
+                    listing.order == nil
+                end
+            else
+                @listings = []
+            end
+        elsif params[:sorted_p]
+            @listings = Listing.all.select do |listing|
+                listing.order == nil
+            end.sort_by { |listing| listing.price }
+        elsif params[:sorted_a]
+            @listings = Listing.all.select do |listing|
+                listing.order == nil
+            end.sort_by { |listing| listing.book.title }
+        else
+            @listings = Listing.all.select do |listing|
+                listing.order == nil
+            end
+        end
     end
     
     def new
