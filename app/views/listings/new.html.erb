@@ -2,10 +2,15 @@
 
 <%= form_for @listing do |f| %>
     <%= f.hidden_field :user_id, value: session[:user_id] %>
-    <%= f.label :book_id %>
-    <%= f.text_field :book_id %>
+    <%= f.label :isbn_number %>
+    <%= f.text_field :isbn_number %>
     <%= f.label :price %>
     <%= f.number_field :price %>
 
     <%= f.submit %>
 <% end %>
+
+
+
+
+

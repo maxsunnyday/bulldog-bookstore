@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_01_192331) do
+ActiveRecord::Schema.define(version: 2019_07_02_234317) do
 
   create_table "books", force: :cascade do |t|
     t.integer "isbn_number"
@@ -18,16 +18,24 @@ ActiveRecord::Schema.define(version: 2019_07_01_192331) do
     t.string "author"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "publisher"
+    t.string "published_date"
+    t.text "description"
+    t.integer "page_count"
+    t.float "average_rating"
+    t.integer "count_of_ratings"
+    t.string "imagelink_thumbnail"
+    t.string "imagelink_large"
+    t.string "google_store_link"
   end
 
   create_table "listings", force: :cascade do |t|
     t.float "price"
     t.integer "user_id"
-    t.integer "book_id"
+    t.integer "isbn_number"
     t.integer "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_listings_on_book_id"
     t.index ["order_id"], name: "index_listings_on_order_id"
     t.index ["user_id"], name: "index_listings_on_user_id"
   end

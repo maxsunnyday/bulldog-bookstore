@@ -1,9 +1,18 @@
 <h1><%= @listing.book.title %></h1>
-<h2>Author: <%= @listing.book.author %></h2>
-<h5>ISBN number: <%= @listing.book.isbn_number %></h5>
-<h2>Price: <%= @listing.price %></h2>
-<h2>Seller: <%= @listing.user.username %></h2>
-<h3>Email: <%= @listing.user.email %></h3>
+<h4>Author: <%= @listing.book.author %></h4>
+<h4>Price: <%= @listing.price %></h4>
+<br>
+<h4>Seller: <%= @listing.user.username %></h4>
+<h4>Email: <%= @listing.user.email %></h4>
+<br>
+<h4>Book details</h4>
+<img src="<%= @listing.book.imagelink_thumbnail %>">
+<p>ISBN number: <%= @listing.book.isbn_number %></p>
+<p>Publisher: <%= @listing.book.publisher %></p>
+<p>Length: <%= @listing.book.page_count %> pages</p>
+<p>Average user review: <%= @listing.book.average_rating %> stars</p>
+<p>Number of reviews: <%= @listing.book.count_of_ratings %></p>
+<p>Description: <%= @listing.book.description %></p>
 
 <%= form_tag "/orders/#{@order.id}", method: :patch do %>
     <%= hidden_field_tag :listing_id, @listing.id %>

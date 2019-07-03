@@ -10,10 +10,19 @@ class ListingsController < ApplicationController
     end
 
     def create
+        # take in the ISBN number(from the new form) and search for an existing book
+        isbn = listing_params["isbn_number"]
+        @book = Book.all.find_or_create_by(isbn_number: isbn)
+        
+        # fill in the book's attributes from google books API
+        @book.update_from_google
+
+        # create the listing
         @listing = Listing.create(listing_params)
 
         if @listing.valid?
-            redirect_to listings_path
+            @order = Order.find_by(user_id: session[:user_id], status: "active")
+            redirect_to listing_path(@listing)
         else
             flash[:error] = @listing.errors.full_messages
             render 'new'
@@ -40,6 +49,6 @@ class ListingsController < ApplicationController
     private
     
     def listing_params
-        params.require(:listing).permit(:user_id, :book_id, :order_id, :price)
+        params.require(:listing).permit(:user_id, :isbn_number, :order_id, :price)
     end
 end
