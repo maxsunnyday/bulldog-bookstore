@@ -23,10 +23,17 @@ class OrdersController < ApplicationController
 
     def update
         # Use order_params or nah?
-        @order = Order.find_by(user_id: session[:user_id], status: "active")
-        @listing = Listing.find(params[:listing_id])
-        @order.listings << @listing
-        redirect_to user_path(User.find(session[:user_id]))
+        if params[:add]
+            @listing = Listing.find(params[:listing_id])
+            @order = Order.find_by(user_id: session[:user_id], status: "active")
+            @order.listings << @listing
+            redirect_to user_path(User.find(session[:user_id]))
+        elsif params[:remove]
+            @listing = Listing.find(params[:listing_id])
+            @listing.order = nil
+            @listing.save
+            redirect_to user_path(User.find(session[:user_id]))
+        end
     end
 
     def checkout

@@ -58,11 +58,14 @@ class ListingsController < ApplicationController
 
     def show
         @listing = Listing.find(params[:id])
-        @order = Order.find_by(user_id: session[:user_id], status: "active")
+        if User.find(session[:user_id]).listings.include?(@listing)
+        else
+            @order = Order.find_by(user_id: session[:user_id], status: "active")
+        end
     end
 
     def edit
-        
+        @listing = Listing.find(params[:id])
     end
 
     def update

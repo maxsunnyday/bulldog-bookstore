@@ -2,6 +2,7 @@ class UsersController < ApplicationController
     before_action :authorized, only: [:show, :edit]
 
     def new
+        session.delete :user_id
         @user = User.new
     end
 
@@ -28,11 +29,22 @@ class UsersController < ApplicationController
     end
 
     def update
+        @user = User.find(session[:user_id])
 
+        if @user.update(user_params)
+            redirect_to user_path(@user)
+        else
+            flash[:error] = @user.errors.full_messages
+            render 'edit'
+        end
     end
 
     def destroy
 
+    end
+
+    def main
+        
     end
 
     private
