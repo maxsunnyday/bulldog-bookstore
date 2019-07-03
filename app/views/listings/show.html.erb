@@ -7,6 +7,7 @@
 <br>
 <h4>Book details</h4>
 <img src="<%= @listing.book.imagelink_thumbnail %>">
+<p><%= link_to "View in Google Store", @listing.book.google_store_link %></p>
 <p>ISBN number: <%= @listing.book.isbn_number %></p>
 <p>Publisher: <%= @listing.book.publisher %></p>
 <p>Length: <%= @listing.book.page_count %> pages</p>

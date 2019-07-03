@@ -31,7 +31,7 @@ class Book < ApplicationRecord
         count_of_ratings: google_book["ratingsCount"],
         imagelink_thumbnail: google_book["imageLinks"]["thumbnail"],
         imagelink_large: google_book["imageLinks"]["large"],
-        google_store_link: google_book["previewLink"]
+        google_store_link: google_book["infoLink"]
         )
     end
 
