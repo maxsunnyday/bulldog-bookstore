@@ -1,9 +1,17 @@
+<% if flash[:error] %>
+<ul>
+<% flash.now[:error].each do |error| %>
+    <li><%= error %></li>
+<% end %>
+</ul>
+<% end %>
+
 <h1>Create a new listing</h1>
 
 <%= form_for @listing do |f| %>
     <%= f.hidden_field :user_id, value: session[:user_id] %>
     <%= f.label :isbn_number %>
-    <%= f.text_field :isbn_number %>
+    <%= f.number_field :isbn_number %>
     <%= f.label :price %>
     <%= f.number_field :price %>
 

@@ -85,6 +85,7 @@ GEM
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     io-like (0.3.0)
+    isbn (2.0.11)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
     listen (3.1.5)
@@ -201,6 +202,7 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   figaro
+  isbn
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   puma (~> 3.11)

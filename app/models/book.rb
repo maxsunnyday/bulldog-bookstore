@@ -12,27 +12,30 @@ class Book < ApplicationRecord
     google_key = Figaro.env.google_key
     uri = URI.parse(URL.concat("/volumes?q=isbn:#{self.isbn_number}&key=#{google_key}"))
     response = Net::HTTP.get_response(uri)
-    google_book = JSON.parse(response.body)["items"][0]["volumeInfo"]
-    
+    if response.header.kind_of?(Net::HTTPOK)
+        google_book = JSON.parse(response.body)["items"][0]["volumeInfo"]
+        
 
-    # Assign all attributes from found google book
-    authors_string = google_book["authors"].map do |author|
-        author.concat("; ") #turns array of authors into string separated by semicolons
-    end.join("")[0..-3] #removes the last semicolon and space
-    
-    self.update(
-        author: authors_string,
-        title: google_book["title"],
-        publisher: google_book["publisher"],
-        published_date: google_book["publishedDate"],
-        description: google_book["description"],
-        page_count: google_book["pageCount"],
-        average_rating: google_book["averageRating"],
-        count_of_ratings: google_book["ratingsCount"],
-        imagelink_thumbnail: google_book["imageLinks"]["thumbnail"],
-        imagelink_large: google_book["imageLinks"]["large"],
-        google_store_link: google_book["infoLink"]
-        )
+        # Assign all attributes from found google book
+        authors_string = google_book["authors"].map do |author|
+            author.concat("; ") #turns array of authors into string separated by semicolons
+        end.join("")[0..-3] #removes the last semicolon and space
+        
+        self.update(
+            author: authors_string,
+            title: google_book["title"],
+            publisher: google_book["publisher"],
+            published_date: google_book["publishedDate"],
+            description: google_book["description"],
+            page_count: google_book["pageCount"],
+            average_rating: google_book["averageRating"],
+            count_of_ratings: google_book["ratingsCount"],
+            imagelink_thumbnail: google_book["imageLinks"]["thumbnail"],
+            imagelink_large: google_book["imageLinks"]["large"],
+            google_store_link: google_book["infoLink"]
+            )
+    else
+    end
     end
 
 
