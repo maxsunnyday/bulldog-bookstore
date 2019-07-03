@@ -10,7 +10,7 @@ class ListingsController < ApplicationController
                 @listings = []
 
                 books.each do |book|
-                    @listings << Listing.where(book_id: book.id)
+                    @listings << Listing.where(isbn_number: book.isbn_number)
                 end
 
                 @listings = @listings.flatten.select do |listing|
@@ -41,7 +41,7 @@ class ListingsController < ApplicationController
     def create
         # take in the ISBN number(from the new form) and search for an existing book
         isbn = listing_params["isbn_number"]
-        @book = Book.all.find_or_create_by(isbn_number: isbn)
+        @book = Book.find_or_create_by(isbn_number: isbn)
         
         # fill in the book's attributes from google books API
         @book.update_from_google
