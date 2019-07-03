@@ -10,15 +10,15 @@ Book.destroy_all
 Order.destroy_all
 User.destroy_all
 
-gatsby = Book.create(title: "The Great Gatsby", author: "F. Scott Fitzgerald", isbn_number: 9129402814)
-into_thin_air = Book.create(title: "Into Thin Air", author: "Jon Krakauer", isbn_number: 4129421414)
-forever_war = Book.create(title: "The Forever War", author: "John Haldeman", isbn_number: 2110001212)
-i_robot = Book.create(title: "I, Robot", author: "Isaac Asimov", isbn_number: 4112140000)
-great_expectations = Book.create(title: "Great Expectations", author: "Mark Twain", isbn_number: 6469219999)
-bad_blood = Book.create(title: "Bad Blood", author: "John Carreyrou", isbn_number: 3139402312)
-tinker_tailor = Book.create(title: "Tinker, Tailor, Soldier, Spy", author: "John Le Carre", isbn_number: 9129402814)
-poodr = Book.create(title: "Practical Object-Oriented Design in Ruby", author: "Sandi Metz", isbn_number: 9125302414)
-bovary = Book.create(title: "Madame Bovary", author: "Gustave Flaubert", isbn_number: 9129402814)
+gatsby = Book.create(title: "The Great Gatsby", author: "F. Scott Fitzgerald", isbn_number: 9780743246392)
+into_thin_air = Book.create(title: "Into Thin Air", author: "Jon Krakauer", isbn_number: 9780679462712)
+forever_war = Book.create(title: "The Forever War", author: "John Haldeman", isbn_number: 9781497692350)
+i_robot = Book.create(title: "I, Robot", author: "Isaac Asimov", isbn_number: 9780553900330)
+great_expectations = Book.create(title: "Great Expectations", author: "Charles Dickens", isbn_number: 9781904633075)
+bad_blood = Book.create(title: "Bad Blood", author: "John Carreyrou", isbn_number: 9781524731663)
+tinker_tailor = Book.create(title: "Tinker, Tailor, Soldier, Spy", author: "John Le Carre", isbn_number: 9781101528785)
+poodr = Book.create(title: "Practical Object-Oriented Design in Ruby", author: "Sandi Metz", isbn_number: 9780321721334)
+bovary = Book.create(title: "Madame Bovary", author: "Gustave Flaubert", isbn_number: 9780553213416)
 
 ganesh = User.create(first_name: "Ganesh", last_name: "Raj", username: "graj", email: "graj08@gmail.com", password: "graj")
 max = User.create(first_name: "Max", last_name: "Sun", username: "maxsunnyday", email: "max.sun@yale.edu", password: "maxsunnyday")
