@@ -1,11 +1,15 @@
 <!-- This is the login page -->
 
-<h1> Create a new session! (Login) </h1>
-
-<%= form_tag "/sessions" do %>
-    <%= label_tag :username %>
-    <%= text_field_tag :username %>
-    <%= label_tag :password %>
-    <%= password_field_tag :password %>
-    <%= submit_tag "Log in" %>
-<% end %>
+<div class="container">
+    <div class="row">
+        <div class="col">
+        <%= image_tag "bulldog.jpg", class: "rounded mx-auto d-block" %>
+        <h1 class="h3 mb-3 text-center">Please sign in</h1>
+        <%= bootstrap_form_tag url: "/sessions" do |f| %>
+            <%= f.text_field :username, placeholder: "username" %>
+            <%= f.password_field :password, placeholder: "Password" %>
+            <%= f.submit "Log in" %>
+        <% end %>
+        </div>
+    </div>
+</div>
