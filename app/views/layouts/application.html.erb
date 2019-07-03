@@ -13,7 +13,6 @@
     <div class="navbar">
       <%= link_to "Listings", listings_path %>
       <%= link_to "Make a New Listing", new_listing_path %>
-      <%= link_to "Make a New Book", new_book_path %>
       <% if logged_in? %>
         <%= link_to "Profile", user_path(current_user) %>
         <%= form_tag "/logout", method: :delete do %>
