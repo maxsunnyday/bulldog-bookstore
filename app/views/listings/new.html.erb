@@ -10,11 +10,14 @@
 
 <%= form_for @listing do |f| %>
     <%= f.hidden_field :user_id, value: session[:user_id] %>
-    <%= f.label :isbn_number %>
-    <%= f.number_field :isbn_number %>
-    <%= f.label :price %>
-    <%= f.number_field :price %>
-
+    <div class="field">
+        <%= f.label :isbn_number, "ISBN Number" %>
+        <%= f.number_field :isbn_number %>
+    </div>
+    <div class="field">
+        <%= f.label :price %>
+        <%= f.number_field :price %>
+    </div>
     <%= f.submit %>
 <% end %>
 

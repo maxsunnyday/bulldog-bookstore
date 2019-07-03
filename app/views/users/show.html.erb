@@ -1,6 +1,8 @@
 <h1><%= @user.first_name %> <%= @user.last_name %></h1>
 <h3><%= @user.email %></h3>
 
+<%= link_to 'Edit Profile', edit_user_path(@user) %>
+
 
 <h2>Your Listings</h2>
 <ul>
