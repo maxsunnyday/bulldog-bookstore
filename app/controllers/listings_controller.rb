@@ -49,7 +49,7 @@ class ListingsController < ApplicationController
         @listing = Listing.create(listing_params)
 
         if @listing.valid?
-        redirect_to listing_path(@listing)
+            redirect_to listing_path(@listing)
         else
             flash.now[:error] = @listing.errors.full_messages
             render 'new'
@@ -73,7 +73,8 @@ class ListingsController < ApplicationController
     end
 
     def destroy
-
+        Listing.destroy(params[:id])
+        redirect_to user_path(User.find(session[:user_id]))
     end
 
     private

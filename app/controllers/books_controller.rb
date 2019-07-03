@@ -15,7 +15,7 @@ class BooksController < ApplicationController
         if @book.valid?
             redirect_to book_path(@book)
         else
-            flash[:error] = @book.errors.full_messages
+            flash.now[:error] = @book.errors.full_messages
             render 'new'
         end
     end

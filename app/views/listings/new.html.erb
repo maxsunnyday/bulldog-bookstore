@@ -1,12 +1,12 @@
-<% if flash[:error] %>
-<ul>
-<% flash.now[:error].each do |error| %>
-    <li><%= error %></li>
-<% end %>
-</ul>
+<% if flash.now[:error] %>
+    <ul>
+    <% flash.now[:error].each do |error| %>
+        <li><%= error %></li>
+    <% end %>
+    </ul>
 <% end %>
 
-<h1>Create a new listing</h1>
+<h1>Create a New Listing</h1>
 
 <%= form_for @listing do |f| %>
     <%= f.hidden_field :user_id, value: session[:user_id] %>

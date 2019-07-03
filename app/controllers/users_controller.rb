@@ -14,7 +14,7 @@ class UsersController < ApplicationController
             Order.create(user_id: session[:user_id], status: "active")
             redirect_to user_path(@user)
         else
-            flash[:error] = @user.errors.full_messages
+            flash.now[:error] = @user.errors.full_messages
             render 'new'
         end
     end
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
         if @user.update(user_params)
             redirect_to user_path(@user)
         else
-            flash[:error] = @user.errors.full_messages
+            flash.now[:error] = @user.errors.full_messages
             render 'edit'
         end
     end

@@ -1,0 +1,21 @@
+<% if flash.now[:error] %>
+    <ul>
+    <% flash.now[:error].each do |error| %>
+        <li><%= error %></li>
+    <% end %>
+    </ul>
+<% end %>
+
+<h1>Edit Listing</h1>
+
+<%= form_for @listing do |f| %>
+    <div class="field">
+        <%= f.label :isbn_number, "ISBN Number" %>
+        <%= f.number_field :isbn_number %>
+    </div>
+    <div class="field">
+        <%= f.label :price %>
+        <%= f.number_field :price %>
+    </div>
+    <%= f.submit %>
+<% end %>
