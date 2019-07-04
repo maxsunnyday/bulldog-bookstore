@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_04_191846) do
+ActiveRecord::Schema.define(version: 2019_07_04_195124) do
 
   create_table "books", force: :cascade do |t|
-    t.integer "isbn_number"
+    t.bigint "isbn_number"
     t.string "title"
     t.string "author"
     t.datetime "created_at", null: false
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2019_07_04_191846) do
   create_table "listings", force: :cascade do |t|
     t.float "price"
     t.integer "user_id"
-    t.integer "isbn_number"
+    t.bigint "isbn_number"
     t.integer "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
