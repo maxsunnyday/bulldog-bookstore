@@ -15,7 +15,7 @@
     </div>
     <div class="field">
         <%= f.label :price %>
-        <%= f.number_field :price %>
+        <%= f.number_field :price, step: 0.01 %>
     </div>
     <%= f.submit %>
 <% end %>

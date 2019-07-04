@@ -10,12 +10,12 @@
 <p><%= link_to "View in Google Store", @listing.book.google_store_link %></p>
 <p>ISBN number: <%= @listing.book.isbn_number %></p>
 <p>Publisher: <%= @listing.book.publisher %></p>
-<p>Length: <%= @listing.book.page_count %> pages</p>
-<p>Average user review: <%= @listing.book.average_rating %> stars</p>
+<p>Length (number of pages): <%= @listing.book.page_count %></p>
+<p>Average user review (out of 5 stars): <%= @listing.book.average_rating %></p>
 <p>Number of reviews: <%= @listing.book.count_of_ratings %></p>
 <p>Description: <%= @listing.book.description %></p>
 
-<% if @order.listings.include?(@listing) %>
+<% if @order && @order.listings.include?(@listing) %>
     <%= form_tag "/orders/#{@order.id}", method: :patch do %>
         <%= hidden_field_tag :listing_id, @listing.id %>
         <%= hidden_field_tag :remove, true %>
