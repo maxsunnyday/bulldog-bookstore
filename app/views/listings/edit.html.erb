@@ -11,11 +11,28 @@
 <%= form_for @listing do |f| %>
     <div class="field">
         <%= f.label :isbn_number, "ISBN Number" %>
-        <%= f.number_field :isbn_number %>
+        <%= f.number_field :isbn_number, required: true %>
     </div>
+    
+    <%= f.fields_for @book do |b| %>
+        <div class="field">
+            <%= b.label :title %>
+            <%= b.text_field :title, required: true %>
+        </div>
+        <div class="field">
+            <%= b.label :author %>
+            <%= b.text_field :author, required: true %>
+        </div>
+        <div class="field">
+            <%= b.label :publisher %>
+            <%= b.text_field :publisher %>
+        </div>
+        <%= b.hidden_field :book_id, value: @book.id %>
+    <% end %>
+
     <div class="field">
         <%= f.label :price %>
-        <%= f.number_field :price, step: 0.01 %>
+        <%= f.number_field :price, step: 0.01, required: true %>
     </div>
     <%= f.submit %>
 <% end %>

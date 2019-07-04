@@ -47,6 +47,7 @@ class ListingsController < ApplicationController
             @order = Order.find_by(user_id: session[:user_id], status: "active")
             @listing = Listing.create(listing_params)
             if @listing.valid?
+                @listing.update(api: true)
                 redirect_to listing_path(@listing)
             else
                 flash.now[:error] = @listing.errors.full_messages
@@ -76,10 +77,24 @@ class ListingsController < ApplicationController
 
     def edit
         @listing = Listing.find(params[:id])
+        @book = @listing.book
     end
 
     def update
         # Gotta do this
+        @listing = Listing.find(params[:id])
+        @book = Book.find_or_create_by(isbn_number: params[:listing][:isbn_number])
+        if @listing.update(listing_params)
+            if @book.update(book_params)
+                redirect_to listing_path(@listing)
+            else
+                flash.now[:error] = @book.errors.full_messages
+                render 'edit'
+            end
+        else
+            flash.now[:error] = @listing.errors.full_messages
+            render 'edit'
+        end
     end
 
     def destroy
@@ -91,5 +106,9 @@ class ListingsController < ApplicationController
     
     def listing_params
         params.require(:listing).permit(:user_id, :isbn_number, :order_id, :price)
+    end
+
+    def book_params
+        params.require(:listing).require(:book).permit(:title, :author, :publisher)
     end
 end

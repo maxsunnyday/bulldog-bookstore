@@ -12,11 +12,11 @@
     <%= f.hidden_field :user_id, value: session[:user_id] %>
     <div class="field">
         <%= f.label :isbn_number, "13-digit ISBN Number (no dashes)" %>
-        <%= f.number_field :isbn_number %>
+        <%= f.number_field :isbn_number, required: true %>
     </div>
     <div class="field">
         <%= f.label :price %>
-        <%= f.number_field :price, step: 0.01 %>
+        <%= f.number_field :price, step: 0.01, required: true %>
     </div>
     <%= f.submit %>
 <% end %>
