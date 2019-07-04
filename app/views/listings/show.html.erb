@@ -1,6 +1,6 @@
-<h1><%= @listing.book.title %></h1>
-<h4>Author: <%= @listing.book.author %></h4>
-<h4>Price: <%= @listing.price %></h4>
+<h1 class="text-center"><%= @listing.book.title %></h1>
+<h4 class="text-center">Author: <%= @listing.book.author %></h4>
+<h4 class="text-center">Price: <%= @listing.price %></h4>
 
 <% if @listing.book.imagelink_thumbnail %>
     <img src="<%= @listing.book.imagelink_thumbnail %>">

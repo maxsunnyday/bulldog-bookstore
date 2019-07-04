@@ -1,24 +1,26 @@
 <% if flash.now[:error] %>
     <ul>
     <% flash.now[:error].each do |error| %>
-        <li><%= error %></li>
+        <li class="text-center"><%= error %></li>
     <% end %>
     </ul>
 <% end %>
 
-<h1>Create a New Listing</h1>
+<h1 class="text-center">Create a New Listing</h1>
 
 <%= form_for @listing do |f| %>
     <%= f.hidden_field :user_id, value: session[:user_id] %>
-    <div class="field">
+    <div class="field text-center">
         <%= f.label :isbn_number, "13-digit ISBN Number (no dashes)" %>
         <%= f.text_field :isbn_number, required: true %>
     </div>
-    <div class="field">
+    <div class="field text-center">
         <%= f.label :price %>
         <%= f.number_field :price, step: 0.01, required: true %>
     </div>
-    <%= f.submit %>
+    <div class="text-center">
+        <%= f.submit %>
+    </div>
 <% end %>
 
 

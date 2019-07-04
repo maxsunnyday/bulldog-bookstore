@@ -1,29 +1,31 @@
-<div class="container">
-  <h1 class="display-4">All Listings</h1>
+<h1 class="text-center">All Listings</h1>
 
-  <div class="search">
-    <b>Search:</b>
-  </div>
+<div class="text-center">
+    <span>
+        <%= form_tag "/listings", method: :get do %>
+            <%= text_field_tag :search %>
+            <%= submit_tag "Search" %>
+        <% end %>
+    </span>
 
-  <%= form_tag "/listings", method: :get do %>
-      <%= text_field_tag :search %>
-      <%= submit_tag "Search" %>
-  <% end %>
+    <span>
+        <%= form_tag "/listings", method: :get do %>
+            <%= hidden_field :sorted_a, true %>
+            <%= submit_tag "Sort Alphabetically By Book Title" %>
+        <% end %>
+    </span>
 
-  <%= form_tag "/listings", method: :get do %>
-      <%= hidden_field :sorted_a, true %>
-      <%= submit_tag "Sort Alphabetically By Book Title" %>
-  <% end %>
+    <span>
+        <%= form_tag "/listings", method: :get do %>
+            <%= hidden_field :sorted_p, true %>
+            <%= submit_tag "Sort By Price (Low to High)" %>
+        <% end %>
+    </span>
+</div>
 
-  <%= form_tag "/listings", method: :get do %>
-      <%= hidden_field :sorted_p, true %>
-      <%= submit_tag "Sort By Price (Low to High)" %>
-  <% end %>
-
-  <h3>Items available for sale</h3>
-  <ul>
-      <% @listings.each do |listing| %>
-          <li><%= link_to listing.book.title, listing_path(listing) %></li>
-      <% end %>
-  </ul>
+<h3 class="text-center">Items Available for Sale</h3>
+<div class="text-center">
+    <% @listings.each do |listing| %>
+        <div class="row col-lg-12 text-center"><%= link_to listing.book.title, listing_path(listing) %></div>
+    <% end %>
 </div>

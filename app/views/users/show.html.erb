@@ -1,25 +1,27 @@
-<h1><%= @user.first_name %> <%= @user.last_name %></h1>
-<h3>Email: <%= @user.email %></h3>
-<h3>Username: <%= @user.username %></h3>
+<h1 class="text-center"><%= @user.first_name %> <%= @user.last_name %></h1>
+<h3 class="text-center">Email: <%= @user.email %></h3>
+<h3 class="text-center">Username: <%= @user.username %></h3>
 
-<%= link_to 'Edit Profile', edit_user_path(@user) %>
-
-
-<h2>Your Listings</h2>
-<ul>
-    <% @user.listings.each do |listing| %>
-        <li><%= link_to "#{listing.book.title}", listing_path(listing) %></li>
-    <% end %>
-</ul>
-
-<% if @user.orders != [] %>
-    <h2>Items In Cart</h2>
-    <ul>
-        <% @user.order_listings.each do |listing| %>
-            <li><%= link_to "#{listing.book.title}", listing_path(listing) %></li>
+<div class="text-center">
+    <%= link_to 'Edit Profile', edit_user_path(@user) %>
+</div>
+<div class="row">
+    <div class="col-lg-6 text-center">
+        <h2>Your Listings</h2>
+        <% @user.listings.each do |listing| %>
+            <div class="row text-center"><%= link_to "#{listing.book.title}", listing_path(listing) %></div>
         <% end %>
-    </ul>
-<% end %>
+    </div>
+
+    <div class="col-lg-6 text-center">
+        <% if @user.orders != [] %>
+            <h2>Items In Cart</h2>
+            <% @user.order_listings.each do |listing| %>
+                <div class="row text-center"><%= link_to "#{listing.book.title}", listing_path(listing) %></div>
+            <% end %>
+        <% end %>
+    </div>
+</div>
 
 <%= form_tag "/checkout", method: :post do %>
     <%= hidden_field :checkout, true %>
