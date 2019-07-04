@@ -14,18 +14,38 @@
       <a class="navbar-brand" href="/">
         <%= image_tag "brand.png", size: "100x43" %>
       </a>
-      <div class="d-flex align-items-end btn-toolbar">
-        <div>
-          <%= bootstrap_form_tag url: '/login' do |f| %>
-            <%= f.submit "Login", class: "btn btn-outline-primary" %>
-          <% end %>
+      <a class="nav-item" href="/listings">
+        <span class="navbar-text">
+          View listings
+        </span>
+      </a>
+      <a class="nav-item" href="/listings/new">
+        <span class="navbar-text">
+          Create a new listing
+        </span>
+      </a>
+      <% if !(logged_in?) %>
+        <div class="d-flex align-items-end btn-toolbar">
+          <div>
+            <%= bootstrap_form_tag url: '/login' do |f| %>
+              <%= f.submit "Login", class: "btn btn-outline-primary" %>
+            <% end %>
+          </div>
+          <div style="padding-left: 10px;">
+            <%= bootstrap_form_tag url: '/signup', class: "pl-4" do |f| %>
+              <%= f.submit "Signup", class: "btn btn-outline-success" %>
+            <% end %>
+          </div>
         </div>
-        <div style="padding-left: 10px;">
-          <%= bootstrap_form_tag url: '/signup', class: "pl-4" do |f| %>
-            <%= f.submit "Signup", class: "btn btn-outline-success" %>
-          <% end %>
+      <% else %>
+        <div class="d-flex align-items-end btn-toolbar">
+          <div>
+            <%= bootstrap_form_tag url: '/logout' do |f| %>
+              <%= f.submit "Logout", class: "btn btn-outline-primary" %>
+            <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
     </nav>
     <%= yield %>
   </body>
