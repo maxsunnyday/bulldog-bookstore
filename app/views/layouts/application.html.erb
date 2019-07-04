@@ -10,21 +10,43 @@
   </head>
 
   <body>
-    <div class="navbar">
-      <%= link_to 'Home', root_path %>
-      <%= link_to "All Listings", listings_path %>
-      <%= link_to "Make a New Listing", new_listing_path %>
-      <% if logged_in? %>
-        <%= link_to "Profile", user_path(current_user) %>
-        <%= form_tag "/logout", method: :delete do %>
-          <%= submit_tag "Logout" %>
-        <% end %>
+    <nav class="navbar navbar-light bg-light mb-5">
+      <a class="navbar-brand" href="/">
+        <%= image_tag "brand.png", size: "100x43" %>
+      </a>
+      <a class="nav-item" href="/listings">
+        <span class="navbar-text">
+          View listings
+        </span>
+      </a>
+      <a class="nav-item" href="/listings/new">
+        <span class="navbar-text">
+          Create a new listing
+        </span>
+      </a>
+      <% if !(logged_in?) %>
+        <div class="d-flex align-items-end btn-toolbar">
+          <div>
+            <%= bootstrap_form_tag url: '/login' do |f| %>
+              <%= f.submit "Login", class: "btn btn-outline-primary" %>
+            <% end %>
+          </div>
+          <div style="padding-left: 10px;">
+            <%= bootstrap_form_tag url: '/signup', class: "pl-4" do |f| %>
+              <%= f.submit "Signup", class: "btn btn-outline-success" %>
+            <% end %>
+          </div>
+        </div>
       <% else %>
-        <%= link_to "Signup", new_user_path %>
-        <%= link_to "Login", "/login" %>
+        <div class="d-flex align-items-end btn-toolbar">
+          <div>
+            <%= bootstrap_form_tag url: '/logout' do |f| %>
+              <%= f.submit "Logout", class: "btn btn-outline-primary" %>
+            <% end %>
+          </div>
+        </div>
       <% end %>
-    </div>
-
+    </nav>
     <%= yield %>
   </body>
 </html>
