@@ -6,8 +6,14 @@ Rails.application.routes.draw do
   resources :books, only: [:index, :show, :new, :create]
   get "/signup", to: "users#new"
   get "/login", to: "sessions#new"
+  get "/profile", to: "users#show"
   post "/sessions", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
   post "/checkout", to: "orders#checkout"
   root "users#main"
+
+  post "/signup", to: "users#new"
+  post "/profile", to: "users#show"
+  post "/logout", to: "sessions#destroy"
+  post "/login", to: "sessions#new"
 end

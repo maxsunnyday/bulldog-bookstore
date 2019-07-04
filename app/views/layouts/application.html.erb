@@ -16,22 +16,24 @@
       </a>
       <a class="nav-item" href="/listings">
         <span class="navbar-text">
-          View listings
+          View All Listings
         </span>
       </a>
       <a class="nav-item" href="/listings/new">
         <span class="navbar-text">
-          Create a new listing
+          Create a New Listing
         </span>
       </a>
       <% if !(logged_in?) %>
         <div class="d-flex align-items-end btn-toolbar">
           <div>
+          <!-- this is a post method, can we change it to a get method? -->
             <%= bootstrap_form_tag url: '/login' do |f| %>
               <%= f.submit "Login", class: "btn btn-outline-primary" %>
             <% end %>
           </div>
           <div style="padding-left: 10px;">
+          <!-- this is a post method, can we change it to a get method? -->
             <%= bootstrap_form_tag url: '/signup', class: "pl-4" do |f| %>
               <%= f.submit "Signup", class: "btn btn-outline-success" %>
             <% end %>
@@ -40,6 +42,13 @@
       <% else %>
         <div class="d-flex align-items-end btn-toolbar">
           <div>
+            <!-- this is a post method, can we change it to a get method? -->
+            <%= bootstrap_form_tag url: '/profile' do |f| %>
+              <%= f.submit "Profile", class: "btn btn-outline-primary" %>
+            <% end %>
+          </div>
+          <div style="padding-left: 10px;">
+            <!-- this is a post method, can we change it to a delete method? -->
             <%= bootstrap_form_tag url: '/logout' do |f| %>
               <%= f.submit "Logout", class: "btn btn-outline-primary" %>
             <% end %>

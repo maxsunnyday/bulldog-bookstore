@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col">
         <%= image_tag "bulldog.jpg", class: "rounded mx-auto d-block", size: "200x200" %>
-        <h1 class="h3 mb-3 text-center">Please sign in</h1>
+        <h1 class="h3 mb-3 text-center">Please Sign In</h1>
         <%= bootstrap_form_tag url: "/sessions" do |f| %>
             <%= f.text_field :username, placeholder: "username" %>
             <%= f.password_field :password, placeholder: "Password" %>

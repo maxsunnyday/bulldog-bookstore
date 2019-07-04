@@ -42,23 +42,33 @@ class ListingsController < ApplicationController
         # take in the ISBN number(from the new form) and search for an existing book
         isbn_input = listing_params["isbn_number"]
         @book = Book.all.find_or_create_by(isbn_number: isbn_input)
-        @book.update_from_google
-
-        # create the listing
-        @order = Order.find_by(user_id: session[:user_id], status: "active")
-        @listing = Listing.create(listing_params)
-
-        if @listing.valid?
-            redirect_to listing_path(@listing)
+        if @book.update_from_google
+            # create the listing
+            @order = Order.find_by(user_id: session[:user_id], status: "active")
+            @listing = Listing.create(listing_params)
+            if @listing.valid?
+                redirect_to listing_path(@listing)
+            else
+                flash.now[:error] = @listing.errors.full_messages
+                render 'new'
+            end
         else
-            flash.now[:error] = @listing.errors.full_messages
-            render 'new'
+            @order = Order.find_by(user_id: session[:user_id], status: "active")
+            @listing = Listing.create(listing_params)
+            if @listing.valid?
+                redirect_to edit_listing_path(@listing)
+            else
+                flash.now[:error] = @listing.errors.full_messages
+                render 'new'
+            end
         end
     end
 
     def show
         @listing = Listing.find(params[:id])
-        if User.find(session[:user_id]).listings.include?(@listing)
+        if @listing.order && @listing.order.status == "done"
+            @done_order = @listing.order
+        elsif User.find(session[:user_id]).listings.include?(@listing)
         else
             @order = Order.find_by(user_id: session[:user_id], status: "active")
         end
@@ -69,7 +79,7 @@ class ListingsController < ApplicationController
     end
 
     def update
-
+        # Gotta do this
     end
 
     def destroy

@@ -35,6 +35,7 @@ class Book < ApplicationRecord
                 google_store_link: google_book["infoLink"]
                 )
         else
+            nil
         end
     end
 
