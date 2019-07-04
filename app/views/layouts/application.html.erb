@@ -10,21 +10,23 @@
   </head>
 
   <body>
-    <div class="navbar">
-      <%= link_to 'Home', root_path %>
-      <%= link_to "All Listings", listings_path %>
-      <%= link_to "Make a New Listing", new_listing_path %>
-      <% if logged_in? %>
-        <%= link_to "Profile", user_path(current_user) %>
-        <%= form_tag "/logout", method: :delete do %>
-          <%= submit_tag "Logout" %>
-        <% end %>
-      <% else %>
-        <%= link_to "Signup", new_user_path %>
-        <%= link_to "Login", "/login" %>
-      <% end %>
-    </div>
-
+    <nav class="navbar navbar-light bg-light mb-5">
+      <a class="navbar-brand" href="/">
+        <%= image_tag "brand.png", size: "100x43" %>
+      </a>
+      <div class="d-flex align-items-end btn-toolbar">
+        <div>
+          <%= bootstrap_form_tag url: '/login' do |f| %>
+            <%= f.submit "Login", class: "btn btn-outline-primary" %>
+          <% end %>
+        </div>
+        <div style="padding-left: 10px;">
+          <%= bootstrap_form_tag url: '/signup', class: "pl-4" do |f| %>
+            <%= f.submit "Signup", class: "btn btn-outline-success" %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
     <%= yield %>
   </body>
 </html>
