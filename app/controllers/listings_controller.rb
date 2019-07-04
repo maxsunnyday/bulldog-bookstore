@@ -41,7 +41,7 @@ class ListingsController < ApplicationController
     def create
         # take in the ISBN number(from the new form) and search for an existing book
         isbn_input = listing_params["isbn_number"]
-        @book = Book.all.find_or_create_by(isbn_number: isbn_input)
+        @book = Book.all.find_or_create_by(isbn_number: isbn_input.to_i)
         if @book.update_from_google
             # create the listing
             @order = Order.find_by(user_id: session[:user_id], status: "active")

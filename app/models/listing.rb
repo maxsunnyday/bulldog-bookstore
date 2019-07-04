@@ -2,7 +2,7 @@ class Listing < ApplicationRecord
   belongs_to :user
   belongs_to :book, foreign_key: 'isbn_number', primary_key: 'isbn_number'
   belongs_to :order, optional: true
-  validates :isbn_number, length: { is: 13 }
+  validates :isbn_number, numericality: true, length: { is: 13 }
   validates :price, presence: true
   # validate :valid_isbn_number
 
