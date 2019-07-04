@@ -7,13 +7,9 @@
 <% end %>
 
 <h1>Edit Listing</h1>
+<h3>ISBN Number: <%= @listing.isbn_number %></h3>
 
 <%= form_for @listing do |f| %>
-    <div class="field">
-        <%= f.label :isbn_number, "ISBN Number" %>
-        <%= f.number_field :isbn_number, required: true %>
-    </div>
-    
     <%= f.fields_for @book do |b| %>
         <div class="field">
             <%= b.label :title %>

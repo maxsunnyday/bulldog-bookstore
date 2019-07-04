@@ -40,27 +40,34 @@ class ListingsController < ApplicationController
 
     def create
         # take in the ISBN number(from the new form) and search for an existing book
-        isbn_input = listing_params["isbn_number"].to_i
-        @book = Book.all.find_or_create_by(isbn_number: isbn_input)
-        if @book.update_from_google
-            # create the listing
-            @order = Order.find_by(user_id: session[:user_id], status: "active")
+        isbn_input = listing_params["isbn_number"]
+        if @book = Book.find_by(isbn_number: isbn_input)
             @listing = Listing.create(listing_params)
             if @listing.valid?
-                @listing.update(api: true, isbn_number: isbn_input)
                 redirect_to listing_path(@listing)
             else
                 flash.now[:error] = @listing.errors.full_messages
                 render 'new'
             end
         else
-            @order = Order.find_by(user_id: session[:user_id], status: "active")
-            @listing = Listing.create(listing_params)
-            if @listing.valid?
-                redirect_to edit_listing_path(@listing)
+            @book = Book.create(isbn_number: isbn_input)
+            if @book.update_from_google
+                # create the listing
+                @listing = Listing.create(listing_params)
+                if @listing.valid?
+                    redirect_to listing_path(@listing)
+                else
+                    flash.now[:error] = @listing.errors.full_messages
+                    render 'new'
+                end
             else
-                flash.now[:error] = @listing.errors.full_messages
-                render 'new'
+                @listing = Listing.create(listing_params)
+                if @listing.valid?
+                    redirect_to edit_listing_path(@listing)
+                else
+                    flash.now[:error] = @listing.errors.full_messages
+                    render 'new'
+                end
             end
         end
     end
@@ -81,9 +88,9 @@ class ListingsController < ApplicationController
     end
 
     def update
-        # Gotta do this
         @listing = Listing.find(params[:id])
-        @book = Book.find_or_create_by(isbn_number: params[:listing][:isbn_number])
+        # @book = Book.find_or_create_by(isbn_number: params[:listing][:isbn_number])
+        @book = @listing.book
         if @listing.update(listing_params)
             if @book.update(book_params)
                 redirect_to listing_path(@listing)
