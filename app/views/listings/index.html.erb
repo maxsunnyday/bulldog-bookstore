@@ -25,7 +25,11 @@
 
 <h3 class="text-center">Items Available for Sale</h3>
 <div class="text-center">
-    <% @listings.each do |listing| %>
-        <div class="row col-lg-12 text-center"><%= link_to listing.book.title, listing_path(listing) %></div>
-    <% end %>
+        <% @listings.each do |listing| %>
+            <% if listing.book.title %>
+                <div><%= link_to listing.book.title, listing_path(listing) %></div>
+            <% else %>
+                <div><%= link_to "No Title for this Listing", listing_path(listing) %></div>
+            <% end %>
+        <% end %>
 </div>

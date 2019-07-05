@@ -1,10 +1,8 @@
 <h1>Past Orders</h1>
 
 <% @orders.each do |order| %>
-    <h3><%= order.updated_at.strftime("%m/%d/%Y at %I:%M%p UTC")  %></h3>
-    <ul>
-        <% order.listings.each do |listing| %>
-            <li><%= link_to listing.book.title, listing_path(listing) %></li>
-        <% end %>
-    </ul>
+    <h4 id="past-order"><%= order.updated_at.strftime("%m/%d/%Y at %I:%M%p UTC")  %></h3>
+    <% order.listings.each do |listing| %>
+        <div><%= link_to listing.book.title, listing_path(listing) %></div>
+    <% end %>
 <% end %>

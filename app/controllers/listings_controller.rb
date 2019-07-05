@@ -50,20 +50,22 @@ class ListingsController < ApplicationController
                 render 'new'
             end
         else
-            @book = Book.create(isbn_number: isbn_input)
+            @book = Book.new(isbn_number: isbn_input)
             if @book.update_from_google
                 # create the listing
                 @listing = Listing.create(listing_params)
                 if @listing.valid?
+                    @book.save
                     redirect_to listing_path(@listing)
                 else
                     flash.now[:error] = @listing.errors.full_messages
                     render 'new'
                 end
             else
-                @listing = Listing.create(listing_params)
+                @listing = Listing.new(listing_params)
                 if @listing.valid?
-                    redirect_to edit_listing_path(@listing)
+                    @no_google = true
+                    render 'new'
                 else
                     flash.now[:error] = @listing.errors.full_messages
                     render 'new'

@@ -13,3 +13,35 @@
  *= require_tree .
  *= require_self
  */
+/* h1, h2, h3, h4, h5, h6, p, form {
+    text-align: center;
+} */
+
+body {
+    text-align: center;
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+div.login {
+    text-align: left;
+}
+
+h1.login {
+    margin-top: 25px; 
+    text-align: center;
+}
+
+div#welcome {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+h4#past-order {
+    margin-top: 15px;
+}
+
+img#thumbnail {
+    padding: 10px;
+}

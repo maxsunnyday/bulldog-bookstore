@@ -9,7 +9,7 @@
     <div class="col-lg-6 text-center">
         <h2>Your Listings</h2>
         <% @user.listings.each do |listing| %>
-            <div class="row text-center"><%= link_to "#{listing.book.title}", listing_path(listing) %></div>
+            <div><%= link_to "#{listing.book.title}", listing_path(listing) %></div>
         <% end %>
     </div>
 
@@ -17,7 +17,7 @@
         <% if @user.orders != [] %>
             <h2>Items In Cart</h2>
             <% @user.order_listings.each do |listing| %>
-                <div class="row text-center"><%= link_to "#{listing.book.title}", listing_path(listing) %></div>
+                <div><%= link_to "#{listing.book.title}", listing_path(listing) %></div>
             <% end %>
         <% end %>
     </div>

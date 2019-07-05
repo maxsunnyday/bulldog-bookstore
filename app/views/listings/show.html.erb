@@ -1,45 +1,46 @@
 <h1 class="text-center"><%= @listing.book.title %></h1>
-<h4 class="text-center">Author: <%= @listing.book.author %></h4>
-<h4 class="text-center">Price: <%= @listing.price %></h4>
+<% if @listing.book.author %>
+    <h4 class="text-center">Author: <%= @listing.book.author %></h4>
+<% end %>
+<h4 class="text-center">Price: $<%= @listing.price %></h4>
 
 <% if @listing.book.imagelink_thumbnail %>
-    <img src="<%= @listing.book.imagelink_thumbnail %>">
+    <img src="<%= @listing.book.imagelink_thumbnail %>" id="thumbnail">
 <% end %>
 
 <% if @listing.book.google_store_link %>
     <p><%= link_to "View in Google Store", @listing.book.google_store_link %></p>
 <% end %>
 
-<p>ISBN number: <%= @listing.book.isbn_number %></p>
+<p><u>ISBN Number:</u> <%= @listing.book.isbn_number %></p>
 
 <% if @listing.book.publisher %>
-    <p>Publisher: <%= @listing.book.publisher %></p>
+    <p><u>Publisher:</u> <%= @listing.book.publisher %></p>
 <% end %>
 
 <% if @listing.book.page_count %>
-    <p>Length (number of pages): <%= @listing.book.page_count %></p>
+    <p><u>Length (number of pages):</u> <%= @listing.book.page_count %></p>
 <% end %>
 
 <% if @listing.book.average_rating %>
-    <p>Average user review (out of 5 stars): <%= @listing.book.average_rating %></p>
+    <p><u>Average User Review (out of 5 stars):</u> <%= @listing.book.average_rating %></p>
 <% end %>
 
 <% if @listing.book.count_of_ratings %>
-    <p>Number of reviews: <%= @listing.book.count_of_ratings %></p>
+    <p><u>Number of Reviews:</u> <%= @listing.book.count_of_ratings %></p>
 <% end %>
 
 <% if @listing.book.description %>
-    <p>Description: <%= @listing.book.description %></p>
+    <p><u>Description:</u> <%= @listing.book.description %></p>
 <% end %>
 
-<h4>Seller: <%= @listing.user.username %></h4>
+<h4>Seller: <%= @listing.user.first_name %> <%= @listing.user.last_name %></h4>
 <h4>Email: <%= @listing.user.email %></h4>
 <br>
 
 <% if @done_order %>
     <h5>Bought by:</h5>
     <h6><%= @done_order.user.first_name %> <%= @done_order.user.last_name %></h6>
-    <h6><%= @done_order.user.username %></h6>
     <h6><%= @done_order.user.email %></h6>
 <% elsif @order && @order.listings.include?(@listing) %>
     <%= form_tag "/orders/#{@order.id}", method: :patch do %>
