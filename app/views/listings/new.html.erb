@@ -9,47 +9,22 @@
 <h1 class="text-center">Create a New Listing</h1>
 
 <% if @no_google %>
-    <h5><i>Sorry, we couldn't find your book through the Google Books API so please enter information manually.</i></h5>
-    <h3>ISBN Number: <%= @listing.isbn_number %></h3>
+    <h5><i>Sorry, we couldn't find your book through the Google Books API so please try again.</i></h5>
+<% end %>
 
-    <%= form_for @listing do |f| %>
-        <%= f.fields_for @book do |b| %>
-            <div class="field">
-                <%= b.label :title %>
-                <%= b.text_field :title, required: true %>
-            </div>
-            <div class="field">
-                <%= b.label :author %>
-                <%= b.text_field :author, required: true %>
-            </div>
-            <div class="field">
-                <%= b.label :publisher %>
-                <%= b.text_field :publisher %>
-            </div>
-            <%= b.hidden_field :book_id, value: @book.id %>
-        <% end %>
-
-        <div class="field">
-            <%= f.label :price %>
-            <%= f.number_field :price, step: 0.01, required: true %>
-        </div>
+<%= form_for @listing do |f| %>
+    <%= f.hidden_field :user_id, value: session[:user_id] %>
+    <div class="field text-center">
+        <%= f.label :isbn_number, "Google Books 13-digit ISBN Number (no dashes)" %>
+        <%= f.text_field :isbn_number, required: true %>
+    </div>
+    <div class="field text-center">
+        <%= f.label :price %>
+        <%= f.number_field :price, step: 0.01, required: true %>
+    </div>
+    <div class="text-center">
         <%= f.submit %>
-    <% end %>
-<% else %>
-    <%= form_for @listing do |f| %>
-        <%= f.hidden_field :user_id, value: session[:user_id] %>
-        <div class="field text-center">
-            <%= f.label :isbn_number, "Google Books 13-digit ISBN Number (no dashes)" %>
-            <%= f.text_field :isbn_number, required: true %>
-        </div>
-        <div class="field text-center">
-            <%= f.label :price %>
-            <%= f.number_field :price, step: 0.01, required: true %>
-        </div>
-        <div class="text-center">
-            <%= f.submit %>
-        </div>
-    <% end %>
+    </div>
 <% end %>
 
 
