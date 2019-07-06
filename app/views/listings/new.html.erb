@@ -39,7 +39,7 @@
     <%= form_for @listing do |f| %>
         <%= f.hidden_field :user_id, value: session[:user_id] %>
         <div class="field text-center">
-            <%= f.label :isbn_number, "13-digit ISBN Number (no dashes)" %>
+            <%= f.label :isbn_number, "Google Books 13-digit ISBN Number (no dashes)" %>
             <%= f.text_field :isbn_number, required: true %>
         </div>
         <div class="field text-center">
